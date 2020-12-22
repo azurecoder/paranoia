@@ -1,15 +1,21 @@
 using System;
+using Paranoia.App;
 
 namespace Paranoia 
 {
     public class Clone
     {
+        private string _name;
         // Core Information
-        public string Name { get; set; }
-        public string SecurityClearance { get; set; }
+        public string Name 
+        { 
+            get { return $"{_name}-{SecurityClearance}-{HomeSector}"; }
+            set { _name = value; } 
+        }
+        public char SecurityClearance { get; set; }
         public string HomeSector { get; set; }
         public int CloneNumber { get; set; }
-        public string Gender { get; set; }
+        public Constants.Gender Gender { get; set; }
         // Development
         public string TreasonStars { get; set; }
         public int XPPoints { get; set; }
