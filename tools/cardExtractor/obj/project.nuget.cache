@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "a04KguyuyUboiY7JHkFhIoPH5eA34zSyF1VGJvbJOZIPzo0GbHcp/i2KVwBVnM9+N3nASsxjtjCj+gQudKtQMw==",
+  "success": true,
+  "projectFilePath": "C:\\src\\paranoia\\tools\\cardExtractor\\cardExtractor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AndyCross\\.nuget\\packages\\sixlabors.imagesharp\\1.0.2\\sixlabors.imagesharp.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

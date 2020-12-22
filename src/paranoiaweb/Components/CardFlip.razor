@@ -1,0 +1,34 @@
+@namespace paranoiaweb.Components
+@inject IJSRuntime jsRuntime
+
+@if (CardType != null && CardIdentifier != null) {
+<div class="card-scene">
+  <div id="card" class="card">
+    <div class="card-face card-backing">
+      <div class="back-main">
+        <div class="cardfull">
+          <img src="img/actionback.png" />
+        </div>
+      </div>
+    </div>
+    <div class="card-face card-front">
+      <div class="main-pane cardfull">
+          <img src='@($"img/image{CardIdentifier}.jpg")' />
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+@functions {
+    [Parameter]
+    public string CardType { get; set; }
+    [Parameter]
+    public string CardIdentifier { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            await jsRuntime.InvokeVoidAsync("cardInit", "level", "card");
+        }
+    } 
+}

@@ -1,0 +1,18 @@
+@page "/"
+@using System.IO
+
+@if (Files != null) {
+    foreach(var file in Files) {
+        <img src='@file.Replace("wwwroot", "")' />
+    }
+}
+
+@functions {
+    public string[] Files { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            Files = Directory.GetFiles("wwwroot/img");
+            StateHasChanged();
+        }
+    } 
+}
