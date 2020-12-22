@@ -13,6 +13,11 @@ namespace Paranoia.App
             return d6.Next(1, maxNumber);
         }
 
+        private int GetSkill(params int[] skills)
+        {
+            return (from skill in skills where skill > 0 select 1).Sum();
+        }
+
         private Clone GenerateSkills(CharacterGenerator generator, Clone clone)
         {
             List<string> skills = new List<string>();
@@ -30,7 +35,22 @@ namespace Paranoia.App
                 info.SetValue(clone, i - 5);
                 skills.Add(Constants.Skills[dieRoll]);
             }
-                    
+            // Now generate the aggregate skills - shift by 1 rather than randomly asign
+            // violence 
+            clone.Mechanics = GetSkill(clone.Athletics, clone.Guns, clone.Melee, clone.Throw);
+            // brains
+            clone.Violence = GetSkill(clone.Science, clone.Psychology, clone.Bureaucracy, clone.AlphaComplex);
+            // chutzpah
+            clone.Brains = GetSkill(clone.Bluff, clone.Charm, clone.Intimidate, clone.Stealth);
+            // mechanics
+            clone.Chutzpah = GetSkill(clone.Operate, clone.Engineer, clone.Program, clone.Demolitions);
+            // set the personal details 
+            clone.Gender = generator.GetDieRoll(2) == 1 ? Constants.Gender.Male : Constants.Gender.Female;
+            clone.CloneNumber = 1;
+            // TODO: Build a random name generator here
+            clone.SecurityClearance = 'R';
+            clone.HomeSector = "CONNECT";
+            clone.Name = "Inter";
             return clone;
         }
 
@@ -72,5 +92,10 @@ namespace Paranoia.App
             "Demolitions"
         };
 
+        public enum Gender 
+        {
+            Male, 
+            Female
+        }
     }
 }
